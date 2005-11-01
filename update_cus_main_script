@@ -7,5 +7,5 @@ source /home/mta/bin/reset_param
 setenv PFILES "${PDIRS}:${SYSPFILES}"
 set path = (/home/ascds/DS.release/bin/  $path)
 
-perl update_cus_mail.perl
+perl /data/mta4/MTA/bin/update_cus_mail.perl
 
