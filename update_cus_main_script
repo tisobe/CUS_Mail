@@ -1,4 +1,4 @@
-source /home/mta/.ascrc
+source /home/ascds/DS.release/config/system/.ascrc
 
 cd /data/mta/Script/Cusmail/CTI/Exc/
 rm -rf param
