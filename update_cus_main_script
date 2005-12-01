@@ -1,6 +1,6 @@
 source /home/ascds/DS.release/config/system/.ascrc
 
-cd /data/mta/Script/Cusmail/CTI/Exc/
+cd /data/mta/Script/Cusmail/Exc/
 rm -rf param
 mkdir param
 source /home/mta/bin/reset_param
