@@ -95,24 +95,24 @@ system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/
 #--- add new entry to htdig.conf
 #
 
-system("mv /home/mta/DIG/htdig-3.1.4/conf/htdig.conf /home/mta/DIG/htdig-3.1.4/conf/htdig.conf~");
-open(FH, "/home/mta/DIG/htdig-3.1.4/conf/htdig.conf~");
-
-open(OUT, ">/home/mta/DIG/htdig-3.1.4/conf/htdig.conf");
-
-$new_line = 'http://hea-www.harvard.edu/~mta/cus/ARCHIVE/'."$year$lmo_up";
-while(<FH>){
-        chomp $_;
-        if($_ =~ /start_url/ && $_ !~ /\#/){
-                @atemp = split(/start_url:       /, $_);
-                $line = 'start_url:       '." $new_line"."$atemp[1]";
-                print OUT "$line\n";
-        }else{
-                print OUT "$_\n";
-        }
-}
-close(OUT);
-close(FH);
+#system("mv /home/mta/DIG/htdig-3.1.4/conf/htdig.conf /home/mta/DIG/htdig-3.1.4/conf/htdig.conf~");
+#open(FH, "/home/mta/DIG/htdig-3.1.4/conf/htdig.conf~");
+#
+#open(OUT, ">/home/mta/DIG/htdig-3.1.4/conf/htdig.conf");
+#
+#$new_line = 'https://icxc.harvard.edu/mta/CUS/MAIL/ARCHIVE/'."$year$lmo_up";
+#while(<FH>){
+#        chomp $_;
+#        if($_ =~ /start_url/ && $_ !~ /\#/){
+#                @atemp = split(/start_url:       /, $_);
+#                $line = 'start_url:       '." $new_line "."\n$atemp[1]";
+#                print OUT "$line\n";
+#        }else{
+#                print OUT "$_\n";
+#        }
+#}
+#close(OUT);
+#close(FH);
 
 #
 #--- add new lines to the html page
