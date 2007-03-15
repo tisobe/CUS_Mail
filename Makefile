@@ -5,7 +5,7 @@ TASK = CUS_Mail
 
 include /data/mta4/MTA/include/Makefile.MTA
 
-BIN  = update_cus_wrap_script update_cus_main_script update_cus_mail.perl update_cus_mail_dec.perl
+BIN  = update_cus_wrap_script update_cus_main_script update_cus_mail.perl update_cus_mail_dec.perl update_cus_dec_wrap_script update_cus_dec_script
 
 DOC  = README
 
