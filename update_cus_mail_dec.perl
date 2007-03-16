@@ -79,13 +79,13 @@ system("/usr/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hype
 #--- clean up the last month's mail
 #
 
-system("rm /data/mta4/www/CUS/MAIL/*.html");
-system("rm -r /data/mta4/www/CUS/MAIL/a*");
+###system("rm /data/mta4/www/CUS/MAIL/*.html");
+###system("rm -r /data/mta4/www/CUS/MAIL/a*");
 
 system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/MAIL -c /home/cus/HYERMAIL/hypermail.config");
 
-system("rm /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html");
-system("rm -r /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*");
+###system("rm /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html");
+###system("rm -r /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*");
 
 system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT -c /home/cus/HYPERMAIL/hypermail_fordtdig.config");
 
@@ -116,7 +116,7 @@ system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/
 #--- add new lines to the html page
 #
 
-system("mv /data/mta4/www/CUS/MAIL/ARCHIVE/index.html /data/mta4/www/CUS/MAIL/ARCHIVE/index.html~");
+system("cp /data/mta4/www/CUS/MAIL/ARCHIVE/index.html /data/mta4/www/CUS/MAIL/ARCHIVE/index.html~");
 open(FH, "/data/mta4/www/CUS/MAIL/ARCHIVE/index.html~");
 
 @save = ();
