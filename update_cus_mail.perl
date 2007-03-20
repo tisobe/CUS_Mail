@@ -7,7 +7,7 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Jul 13, 2005							#
+#	last update: Mar 20, 2007							#
 #											#
 #########################################################################################
 
@@ -81,13 +81,21 @@ system("/usr/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hype
 #--- clean up the last month's mail
 #
 
-system("rm /data/mta4/www/CUS/MAIL/*.html");
-system("rm -r /data/mta4/www/CUS/MAIL/a*");
+$c_dir = '/data/mta4/www/CUS/MAIL/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
+system("mkdir $c_dir");
+##system("rm /data/mta4/www/CUS/MAIL/*.html");
+##system("rm -r /data/mta4/www/CUS/MAIL/a*");
+system("mv /data/mta4/www/CUS/MAIL/*.html $c_dir");
+system("mv /data/mta4/www/CUS/MAIL/a*     $c_dir");
 
 system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/MAIL -c /home/cus/HYERMAIL/hypermail.config");
 
-system("rm /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html");
-system("rm -r /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*");
+$c_dir = '/data/mta4/www/CUS/MAIL/ARCHIVE/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
+system("mkdir $c_dir");
+##system("rm /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html");
+##system("rm -r /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*");
+system("mv /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html $_dir");
+system("mv /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*     $_dir");
 
 system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT -c /home/cus/HYPERMAIL/hypermail_fordtdig.config");
 
