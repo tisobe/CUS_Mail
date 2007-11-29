@@ -70,7 +70,7 @@ $pmo_fl = $month_fl;
 #
 
 
-$a_dir = '/data/mta4/www/CUS/MAIL/ARCHIVE/'."$lyear"."$lmo_up";
+$a_dir = '/data/mta4/CUS/www/MAIL/ARCHIVE/'."$lyear"."$lmo_up";
 system("mkdir $a_dir");
 
 $b_dir = '/arc/cus/mail_archive.'."$lmo_lo";
@@ -81,23 +81,23 @@ system("/usr/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hype
 #--- clean up the last month's mail
 #
 
-$c_dir = '/data/mta4/www/CUS/MAIL/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
+$c_dir = '/data/mta4/CUS/www/MAIL/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
 system("mkdir $c_dir");
-##system("rm /data/mta4/www/CUS/MAIL/*.html");
-##system("rm -r /data/mta4/www/CUS/MAIL/a*");
-system("mv /data/mta4/www/CUS/MAIL/*.html $c_dir");
-system("mv /data/mta4/www/CUS/MAIL/a*     $c_dir");
+##system("rm /data/mta4/CUS/www/MAIL/*.html");
+##system("rm -r /data/mta4/CUS/www/MAIL/a*");
+system("mv /data/mta4/CUS/www/MAIL/*.html $c_dir");
+system("mv /data/mta4/CUS/www/MAIL/a*     $c_dir");
 
-system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/MAIL -c /home/cus/HYERMAIL/hypermail.config");
+system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL -c /home/cus/HYERMAIL/hypermail.config");
 
-$c_dir = '/data/mta4/www/CUS/MAIL/ARCHIVE/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
+$c_dir = '/data/mta4/CUS/www/MAIL/ARCHIVE/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
 system("mkdir $c_dir");
-##system("rm /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html");
-##system("rm -r /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*");
-system("mv /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/*.html $_dir");
-system("mv /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT/a*     $_dir");
+##system("rm /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/*.html");
+##system("rm -r /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/a*");
+system("mv /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/*.html $_dir");
+system("mv /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/a*     $_dir");
 
-system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/MAIL/ARCHIVE/CURRENT -c /home/cus/HYPERMAIL/hypermail_fordtdig.config");
+system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT -c /home/cus/HYPERMAIL/hypermail_fordtdig.config");
 
 #
 #--- add new entry to htdig.conf
@@ -126,8 +126,8 @@ system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/www/CUS/
 #--- add new lines to the html page
 #
 
-system("mv /data/mta4/www/CUS/MAIL/ARCHIVE/index.html /data/mta4/www/CUS/MAIL/ARCHIVE/index.html~");
-open(FH, "/data/mta4/www/CUS/MAIL/ARCHIVE/index.html~");
+system("mv /data/mta4/CUS/www/MAIL/ARCHIVE/index.html /data/mta4/CUS/www/MAIL/ARCHIVE/index.html~");
+open(FH, "/data/mta4/CUS/www/MAIL/ARCHIVE/index.html~");
 
 @save = ();
 
@@ -157,7 +157,7 @@ while(<FH>){
 }
 close(FH);
 
-open(OUT, "> /data/mta4/www/CUS/MAIL/ARCHIVE/index.html");
+open(OUT, "> /data/mta4/CUS/www/MAIL/ARCHIVE/index.html");
 foreach $ent (@save){
 	print OUT "$ent\n";
 }
