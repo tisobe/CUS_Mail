@@ -9,7 +9,7 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Mar 20, 2007							#
+#	last update: Jun 05, 2008							#
 #											#
 #########################################################################################
 
@@ -70,55 +70,20 @@ $pmo_fl = $month_fl;
 $a_dir = '/data/mta4/CUS/www/MAIL/ARCHIVE/'."$lyear"."$lmo_up";
 system("mkdir $a_dir");
 
-#$b_dir = '/arc/cus/mail_archive.'."$lmo_lo";
 $b_dir = '/arc/cus/mail_archive';
 
 system("/usr/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hypermail.config");
 
 #
-#--- clean up the last month's mail
+#--- clean up the last month's mail, and save them in SECONDARY_SAVE
 #
 
 $c_dir = '/data/mta4/CUS/www/MAIL/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
 system("mkdir $c_dir");
-###system("rm /data/mta4/CUS/www/MAIL/*.html");
-###system("rm -r /data/mta4/CUS/www/MAIL/a*");
 system("cp     /data/mta4/CUS/www/MAIL/*.html $c_dir");
 system("cp -r  /data/mta4/CUS/www/MAIL/a*     $c_dir");
 
 system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL -c /home/cus/HYERMAIL/hypermail.config");
-
-$c_dir = '/data/mta4/CUS/www/MAIL/ARCHIVE/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
-system("mkdir $c_dir");
-###system("rm /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/*.html");
-###system("rm -r /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/a*");
-system("cp    /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/*.html $_dir");
-system("cp -r /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT/a*     $_dir");
-
-system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL/ARCHIVE/CURRENT -c /home/cus/HYPERMAIL/hypermail_fordtdig.config");
-
-#
-#--- add new entry to htdig.conf
-#
-
-#system("mv /home/mta/DIG/htdig-3.1.4/conf/htdig.conf /home/mta/DIG/htdig-3.1.4/conf/htdig.conf~");
-#open(FH, "/home/mta/DIG/htdig-3.1.4/conf/htdig.conf~");
-#
-#open(OUT, ">/home/mta/DIG/htdig-3.1.4/conf/htdig.conf");
-#
-#$new_line = 'https://icxc.harvard.edu/mta/CUS/MAIL/ARCHIVE/'."$year$lmo_up";
-#while(<FH>){
-#        chomp $_;
-#        if($_ =~ /start_url/ && $_ !~ /\#/){
-#                @atemp = split(/start_url:       /, $_);
-#                $line = 'start_url:       '." $new_line "."\n$atemp[1]";
-#                print OUT "$line\n";
-#        }else{
-#                print OUT "$_\n";
-#        }
-#}
-#close(OUT);
-#close(FH);
 
 #
 #--- add new lines to the html page
