@@ -1,4 +1,6 @@
 
+This is the main script and put the mail into /data/mta4/CUS/www/MAIL
+(https://icxc.harvard.edu/cus/MAIL/)
 
 update_cus_mail.perl
 --------------------
