@@ -4,8 +4,9 @@ cd /data/mta/Script/Cusmail/Exc/
 rm -rf param
 mkdir param
 source /home/mta/bin/reset_param
-setenv PFILES "${PDIRS}:${SYSPFILES}"
+setenv PFILES "${PDIRS}"
 set path = (/home/ascds/DS.release/bin/  $path)
+set path = (/home/ascds/DS.release/ots/bin/ $path)
 
 perl /data/mta4/MTA/bin/update_cus_mail.perl
 
