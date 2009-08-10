@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/opt/bin/perl
 
 #########################################################################################
 #											#
@@ -7,7 +7,7 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Jun 05, 2008							#
+#	last update: Aug 10, 2009							#
 #											#
 #########################################################################################
 
@@ -75,7 +75,7 @@ system("mkdir $a_dir");
 
 $b_dir = '/arc/cus/mail_archive.'."$lmo_lo";
 
-system("/usr/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hypermail.config");
+system("/opt/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hypermail.config");
 
 #
 #--- clean up the last month's mail; save them in SECONDARY_SAVE.
@@ -90,7 +90,7 @@ system("mv /data/mta4/CUS/www/MAIL/a*     $c_dir");
 #--- check the new email for this month
 #
 
-system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL -c /home/cus/HYERMAIL/hypermail.config");
+system("/opt/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL -c /home/cus/HYERMAIL/hypermail.config");
 
 #
 #--- add new lines to the html page
