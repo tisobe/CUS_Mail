@@ -9,7 +9,7 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Jun 05, 2008							#
+#	last update: Jan 07, 2010							#
 #											#
 #########################################################################################
 
@@ -29,7 +29,7 @@ $month  = $umon + 1;
 if($month < 12){
 	exit 1;
 }
-if($uyday < 365){
+if($uyday < 364){
 	exit 1;
 }
 
