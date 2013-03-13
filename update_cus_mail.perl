@@ -7,18 +7,46 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Aug 10, 2009							#
+#	last update: Mar 13, 2013							#
 #											#
 #########################################################################################
+#
+#--- check whether this is a test case
+#
+
+$comp_test = $ARGV[0];
+chomp $comp_test;
+
+#
+#---- read directories
+#
+if($comp_test =~ /test/i){
+	open(FH, "/data/mta/Script/Cusmail_linux/house_keeping/dir_list_test");
+}else{
+	open(FH, "/data/mta/Script/Cusmail_linux/house_keeping/dir_list");
+}
+
+while(<FH>){
+    chomp $_;
+    @atemp = split(/\s+/, $_);
+    ${$atemp[0]} = $atemp[1];
+}
+close(FH);
+
 
 #
 #--- get today's date
 #
+if($comp_test =~ /test/i){
+	$year  = 2013;
+	$month = 3;
+	$umon  = 2;
+}else{
+	($usec, $umin, $uhour, $umday, $umon, $uyear, $uwday, $uyday, $uisdst)= localtime(time);
 
-($usec, $umin, $uhour, $umday, $umon, $uyear, $uwday, $uyday, $uisdst)= localtime(time);
-
-$year   = 1900   + $uyear;
-$month  = $umon  + 1;
+	$year   = 1900   + $uyear;
+	$month  = $umon  + 1;
+}
 
 #
 #--- change month from number to letters
@@ -69,35 +97,35 @@ $pmo_fl = $month_fl;
 #--- create a new directory for the last month's archive
 #
 
-
-$a_dir = '/data/mta4/CUS/www/MAIL/ARCHIVE/'."$lyear"."$lmo_up";
+$a_dir = "$arch_dir"."$lyear"."$lmo_up";
 system("mkdir $a_dir");
 
-$b_dir = '/arc/cus/mail_archive.'."$lmo_lo";
+$b_dir = "$march_dir".'.'."$lmo_lo";
 
-system("/opt/local/bin/hypermail -m $b_dir -d $a_dir -c /home/cus/HYPERMAIL/hypermail.config");
+system("$op_dir/hypermail -m $b_dir -d $a_dir -c $house_keeping/hypermail.config");
 
 #
 #--- clean up the last month's mail; save them in SECONDARY_SAVE.
 #
 
-$c_dir = '/data/mta4/CUS/www/MAIL/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
+$c_dir = "$secondary_dir"."$lyear"."$lmo_up".'/';
 system("mkdir $c_dir");
-system("mv /data/mta4/CUS/www/MAIL/*.html $c_dir");
-system("mv /data/mta4/CUS/www/MAIL/a*     $c_dir");
+system("mv $cmail_dir/*.html $c_dir");
+system("mv $cmail_dir/a*     $c_dir");
+system("gzip -r $c_dir/*");
 
 #
 #--- check the new email for this month
 #
 
-system("/opt/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL -c /home/cus/HYERMAIL/hypermail.config");
+system("$op_dir/hypermail -m $march_dir -d $cmail_dir -c $hosue_keeping/hypermail.config");
 
 #
 #--- add new lines to the html page
 #
 
-system("mv /data/mta4/CUS/www/MAIL/ARCHIVE/index.html /data/mta4/CUS/www/MAIL/ARCHIVE/index.html~");
-open(FH, "/data/mta4/CUS/www/MAIL/ARCHIVE/index.html~");
+system("mv $arch_dir/index.html $arch_dir/index.html~");
+open(FH, "$arhc_dir/index.html~");
 
 @save = ();
 
@@ -127,7 +155,7 @@ while(<FH>){
 }
 close(FH);
 
-open(OUT, "> /data/mta4/CUS/www/MAIL/ARCHIVE/index.html");
+open(OUT, "> $arch_dir/index.html");
 foreach $ent (@save){
 	print OUT "$ent\n";
 }

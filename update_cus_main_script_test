@@ -1,0 +1,13 @@
+source /home/mta/.ascrc  -r /home/ascds/DS.test
+
+cd /data/mta/Script/Cusmail_linux/Exc/
+rm -rf param
+mkdir param
+source /home/mta/bin/reset_param
+set path = (/home/ascds/DS.test/bin/  $path)
+set path = (/home/ascds/DS.test/bin/ $path)
+
+perl /data/mta/Script/Cusmail_linux/CUS_Mail/prep_test.perl
+
+perl /data/mta/Script/Cusmail_linux/CUS_Mail/update_cus_mail.perl test
+
