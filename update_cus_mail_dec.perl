@@ -9,7 +9,7 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Jan 07, 2010							#
+#	last update: Mar 27, 2013							#
 #											#
 #########################################################################################
 
@@ -20,18 +20,18 @@
 ($usec, $umin, $uhour, $umday, $umon, $uyear, $uwday, $uyday, $uisdst)= localtime(time);
 
 $year   = 1900   + $uyear;
-$month  = $umon + 1;
+$month  = 12;
 
 #
 #--- this script must be run only Dec 31
 #
 
-if($month < 12){
-	exit 1;
-}
-if($uyday < 364){
-	exit 1;
-}
+#if($month < 12){
+#	exit 1;
+#}
+#if($uyday < 364){
+#	exit 1;
+#}
 
 #
 #--- change month from number to letters
@@ -47,13 +47,8 @@ $lmo_fl = $month_fl;
 #--- find out the last month
 #
 
-if($umon == 0){
-	$lmonth = 12;
-	$lyear = $year -1;
-}else{
-	$lmonth = $umon;
-	$lyear  = $year;
-}
+$lmonth = 11;
+$lyear  = $year;
 
 mo_no_to_lett($lmonth);
 
@@ -82,6 +77,10 @@ $c_dir = '/data/mta4/CUS/www/MAIL/SECONDARY_SAVE/'."$lyear"."$lmo_up".'/';
 system("mkdir $c_dir");
 system("cp     /data/mta4/CUS/www/MAIL/*.html $c_dir");
 system("cp -r  /data/mta4/CUS/www/MAIL/a*     $c_dir");
+system("gzip -r $c_dir/*");
+
+system("mv     /data/mta4/CUS/www/MAIL/*.html $a_dir");
+system("mv -r  /data/mta4/CUS/www/MAIL/a*     $a_dir");
 
 system("/usr/local/bin/hypermail -m /arc/cus/mail_archive -d /data/mta4/CUS/www/MAIL -c /home/cus/HYERMAIL/hypermail.config");
 
