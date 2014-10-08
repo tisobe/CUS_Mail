@@ -1,12 +1,7 @@
-source /home/ascds/DS.release/config/system/.ascrc
-
-cd /data/mta/Script/Cusmail_linux/Exc/
+cd /data/mta/Script/Cusmail/Exc/
 rm -rf param
 mkdir param
 source /home/mta/bin/reset_param
-setenv PFILES "${PDIRS}"
-set path = (/home/ascds/DS.release/bin/  $path)
-set path = (/home/ascds/DS.release/ots/bin/ $path)
 
-perl /data/mta/Script/Cusmail_linux/CUS_Mail/update_cus_mail.perl
+/usr/local/bin/perl /data/mta/Script/Cusmail/CUS_Mail/update_cus_mail.perl
 

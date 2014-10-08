@@ -7,7 +7,7 @@
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
 #											#
-#	last update: Mar 13, 2013							#
+#	last update: Apr 01, 2014							#
 #											#
 #########################################################################################
 #
@@ -21,9 +21,9 @@ chomp $comp_test;
 #---- read directories
 #
 if($comp_test =~ /test/i){
-	open(FH, "/data/mta/Script/Cusmail_linux/house_keeping/dir_list_test");
+	open(FH, "/data/mta/Script/Cusmail/house_keeping/dir_list_test");
 }else{
-	open(FH, "/data/mta/Script/Cusmail_linux/house_keeping/dir_list");
+	open(FH, "/data/mta/Script/Cusmail/house_keeping/dir_list");
 }
 
 while(<FH>){
@@ -101,8 +101,20 @@ $a_dir = "$arch_dir"."$lyear"."$lmo_up";
 system("mkdir $a_dir");
 
 $b_dir = "$march_dir".'.'."$lmo_lo";
+#
+#--- check whether b_dir is created, if not skip hypermail part
+##
+$dchk  = "$march_dir".'*';
+$input = `ls $dchk`;
+if($input =~ /$b_dir/){
+    $chk = 1;
+}else{
+    $chk = 0;
+}
 
-system("$op_dir/hypermail -m $b_dir -d $a_dir -c $house_keeping/hypermail.config");
+if($chk == 1){
+    system("$op_dir/hypermail -m $b_dir -d $a_dir -c $house_keeping/hypermail.config");
+}
 
 #
 #--- clean up the last month's mail; save them in SECONDARY_SAVE.
@@ -124,18 +136,19 @@ system("$op_dir/hypermail -m $march_dir -d $cmail_dir -c $hosue_keeping/hypermai
 #--- add new lines to the html page
 #
 
-system("mv $arch_dir/index.html $arch_dir/index.html~");
-open(FH, "$arhc_dir/index.html~");
+system("cp $arch_dir/index.html $arch_dir/index.html~");
+open(FH, "$arch_dir/index.html");
 
 @save = ();
 
-$current = '<LI><A HREF="../."><STRONG> Current Month: '."$cmo_fl $year".'</STRONG></A>';
-$test    = '<LI><A HREF="./'."$pyear$pmo_up".'"><STRONG> '."$pmo_fl $pyear".'</STRONG></A>';
-$line    = '<LI><A HREF="./'."$lyear$lmo_up".'"><STRONG> '."$lmo_fl $lyear".'</STRONG></A>';
+$current = '<li><a href="../."><b> Current Month: '."$cmo_fl $year".'</b></a></li>';
+$test    = '<li><a href="./'."$pyear$pmo_up".'"><b> '."$pmo_fl $pyear".'</b></a>></li>';
+$line    = '<li><a href="./'."$lyear$lmo_up".'"><b> '."$lmo_fl $lyear".'</b></a>></li>';
 
 while(<FH>){
 	chomp $_;
-	if($_ =~ /$test/){
+#	if($_ =~ /$test/){
+	if($_ =~ /$pyear/ && $_ =~ /$pmo_up/i){
 		push(@save, $_);
 		if($lmonth != 1){
 			push(@save, $line);
@@ -145,9 +158,13 @@ while(<FH>){
 		if($lmonth == 1){
 			$tline = '<hr>';
 			$new1 = '<h3> '."$year".'<h3>';
+            $new2 = '<ul>';
+            $new3 = '</ul>';
 			push(@save, $tline);
 			push(@save, $new1);
+			push(@save, $new2);
 			push(@save, $line);
+			push(@save, $new3);
 		}
 	}else{
 		push(@save, $_);
